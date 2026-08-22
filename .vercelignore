@@ -1,0 +1,6 @@
+backend/
+api/
+requirements.txt
+.python-version
+render.yaml
+docker-compose.yml
