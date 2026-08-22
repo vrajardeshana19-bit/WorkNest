@@ -1462,3 +1462,27 @@ Add the project's chosen license before public release.
 ## WorkNest
 
 **Connected HR operations. Intelligent decisions. Automated consequences.**
+
+---
+
+# 🚀 Backend foundation (implemented)
+
+The `backend/` folder contains the FastAPI foundation (auth, employees, attendance, holidays).
+
+## Quick start
+
+```bash
+cd backend
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env   # set DATABASE_URL and JWT_SECRET locally — never commit .env
+alembic upgrade head
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+pytest -v
+```
+
+- API docs: http://localhost:8000/docs
+- API contract: [docs/API_CONTRACT.md](docs/API_CONTRACT.md)
+
+Implemented on `main` from branch `backend` (Person 1 — Naman Anand).
