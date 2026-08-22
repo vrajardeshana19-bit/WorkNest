@@ -1,7 +1,6 @@
 import React, { lazy, Suspense, useState } from 'react';
 import { LoginPage } from '../../pages/LoginPage';
 import { RegisterPage } from '../../pages/RegisterPage';
-import { LoadingSpinner } from '../common/LoadingSpinner';
 
 const AuthIntroScene = lazy(() =>
   import('./AuthIntroScene').then((m) => ({ default: m.AuthIntroScene }))
