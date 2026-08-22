@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WorkNest | HR Operations, Connected Intelligently</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-container": "#6063ee",
+                      "inverse-on-surface": "#eff1f3",
+                      "on-tertiary-fixed-variant": "#3c475a",
+                      "tertiary-fixed": "#d8e3fb",
+                      "primary-container": "#131b2e",
+                      "inverse-surface": "#2d3133",
+                      "on-error": "#ffffff",
+                      "primary-fixed-dim": "#bec6e0",
+                      "on-secondary-container": "#fffbff",
+                      "on-secondary-fixed-variant": "#2f2ebe",
+                      "error-container": "#ffdad6",
+                      "surface-dim": "#d8dadc",
+                      "error": "#ba1a1a",
+                      "surface": "#f7f9fb",
+                      "inverse-primary": "#bec6e0",
+                      "on-tertiary-container": "#79849a",
+                      "tertiary-container": "#111c2d",
+                      "outline": "#76777d",
+                      "secondary-fixed-dim": "#c0c1ff",
+                      "on-surface-variant": "#45464d",
+                      "on-primary-container": "#7c839b",
+                      "surface-variant": "#e0e3e5",
+                      "on-error-container": "#93000a",
+                      "tertiary": "#000000",
+                      "primary": "#000000",
+                      "on-surface": "#191c1e",
+                      "on-primary": "#ffffff",
+                      "secondary-fixed": "#e1e0ff",
+                      "on-primary-fixed-variant": "#3f465c",
+                      "outline-variant": "#c6c6cd",
+                      "background": "#f7f9fb",
+                      "on-background": "#191c1e",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-fixed": "#131b2e",
+                      "tertiary-fixed-dim": "#bcc7de",
+                      "on-secondary-fixed": "#07006c",
+                      "surface-tint": "#565e74",
+                      "surface-container-low": "#f2f4f6",
+                      "surface-container-high": "#e6e8ea",
+                      "surface-container": "#eceef0",
+                      "surface-container-highest": "#e0e3e5",
+                      "secondary": "#4648d4",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-bright": "#f7f9fb",
+                      "primary-fixed": "#dae2fd",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary-fixed": "#111c2d"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "base": "4px",
+                      "container-max": "1440px",
+                      "xs": "4px",
+                      "lg": "24px",
+                      "margin-mobile": "16px",
+                      "md": "16px",
+                      "sm": "8px",
+                      "xl": "40px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": [
+                              "Geist"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Geist"
+                      ],
+                      "headline-md": [
+                              "Geist"
+                      ],
+                      "numeric-kpi": [
+                              "Geist"
+                      ],
+                      "label-md": [
+                              "Geist"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "numeric-kpi": [
+                              "36px",
+                              {
+                                      "lineHeight": "44px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: transparent;
+        }
+        h1, h2, h3, h4, h5, h6, .font-geist {
+            font-family: 'Geist', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="text-on-surface antialiased overflow-x-hidden min-h-screen relative">
+<!-- Fixed Background Shader -->
+<div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+<!-- STITCH_SHADER_START:ANIMATION_15 class="absolute inset-0 w-full h-full object-cover" -->
+<div class="absolute inset-0 w-full h-full object-cover" style="display:block;">
+<canvas id="shader-canvas-ANIMATION_15" style="display:block;width:100%;height:100%"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('shader-canvas-ANIMATION_15');
+
+  // Sync the WebGL drawing-buffer size with the CSS-driven layout size.
+  // This fires on initial layout and whenever the element is resized.
+  function syncSize() {
+    const w = canvas.clientWidth  || 1280;
+    const h = canvas.clientHeight || 720;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width  = w;
+      canvas.height = h;
+    }
+  }
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(syncSize).observe(canvas);
+  }
+  syncSize();
+
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+  const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+  const fs = `precision highp float;
+
+uniform float u_time;
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+
+varying vec2 v_texCoord;
+
+float hash(vec2 p) {
+    p = fract(p * vec2(123.34, 456.21));
+    p += dot(p, p + 45.32);
+    return fract(p.x * p.y);
+}
+
+float noise(vec2 p) {
+    vec2 i = floor(p);
+    vec2 f = fract(p);
+    f = f * f * (3.0 - 2.0 * f);
+    float a = hash(i);
+    float b = hash(i + vec2(1.0, 0.0));
+    float c = hash(i + vec2(0.0, 1.0));
+    float d = hash(i + vec2(1.0, 1.0));
+    return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+}
+
+void main() {
+    vec2 uv = v_texCoord;
+    vec2 centered_uv = (uv - 0.5) * 2.0;
+    centered_uv.x *= u_resolution.x / u_resolution.y;
+
+    // Layer 1: Base - Deep Midnight Navy
+    vec3 baseColor = mix(vec3(0.01, 0.02, 0.05), vec3(0.02, 0.03, 0.06), uv.y);
+    
+    // Layer 2: Ambient Light Fields (Indigo/Violet)
+    float light1 = smoothstep(1.8, 0.0, length(centered_uv - vec2(-1.2, 0.8)));
+    float light2 = smoothstep(1.5, 0.0, length(centered_uv - vec2(1.2, -0.6)));
+    float light3 = smoothstep(1.2, 0.0, length(centered_uv - vec2(0.3, 0.2)));
+    
+    vec3 indigo = vec3(0.15, 0.2, 0.6) * 0.12;
+    vec3 violet = vec3(0.3, 0.1, 0.5) * 0.1;
+    vec3 cyan = vec3(0.1, 0.4, 0.5) * 0.05;
+    
+    baseColor += indigo * light1;
+    baseColor += violet * light2;
+    baseColor += cyan * light3 * (0.8 + 0.2 * sin(u_time * 0.5));
+
+    // Layer 3: Architectural Grid (Extremely subtle)
+    vec2 grid_uv = uv * 30.0;
+    vec2 grid = abs(fract(grid_uv - 0.5) - 0.5) / fwidth(grid_uv);
+    float line = min(grid.x, grid.y);
+    float gridPattern = 1.0 - smoothstep(0.0, 0.04, line);
+    baseColor += vec3(1.0) * gridPattern * 0.008;
+
+    // Layer 4: Orbital Curves
+    float orbit1 = abs(length(centered_uv - vec2(0.0, -1.5)) - 1.8);
+    float orbit2 = abs(length(centered_uv - vec2(1.5, 1.5)) - 2.2);
+    baseColor += vec3(0.4, 0.5, 1.0) * smoothstep(0.003, 0.0, orbit1) * 0.04;
+    baseColor += vec3(0.6, 0.4, 1.0) * smoothstep(0.003, 0.0, orbit2) * 0.03;
+
+    // Layer 5: Network Nodes & Data Paths
+    float network = 0.0;
+    vec2 net_uv = uv * 6.0;
+    vec2 g_id = floor(net_uv);
+    vec2 g_f = fract(net_uv);
+    
+    for(float y=-1.0; y<=1.0; y++) {
+        for(float x=-1.0; x<=1.0; x++) {
+            vec2 offs = vec2(x, y);
+            vec2 p = g_id + offs;
+            float h = hash(p);
+            if(h > 0.85) {
+                vec2 node_pos = p + vec2(hash(p+1.0), hash(p+2.0));
+                float dist = length(net_uv - node_pos);
+                float pulse = 0.5 + 0.5 * sin(u_time * 1.5 + h * 10.0);
+                network += smoothstep(0.06, 0.0, dist) * 0.2 * pulse;
+            }
+        }
+    }
+    baseColor += vec3(0.5, 0.6, 1.0) * network * 0.1;
+
+    // Layer 6: Micro Noise/Grain
+    float grain = hash(uv + u_time * 0.01);
+    baseColor += (grain - 0.5) * 0.012;
+
+    gl_FragColor = vec4(baseColor, 1.0);
+}`;
+  function cs(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const pos = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uRes = gl.getUniformLocation(prog, 'u_resolution');
+  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+  // u_mouse is in pixel coordinates matching u_resolution (ShaderToy convention).
+  // Shaders that need normalized coords should use: u_mouse / u_resolution.
+  let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+  window.addEventListener('mousemove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width && rect.height) {
+      const nx = (event.clientX - rect.left) / rect.width;
+      const ny = 1.0 - (event.clientY - rect.top) / rect.height;
+      mouse.x = nx * canvas.width;
+      mouse.y = ny * canvas.height;
+    }
+  });
+
+  function render(t) {
+    if (typeof ResizeObserver === 'undefined') syncSize();
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    if (uTime) gl.uniform1f(uTime, t * 0.001);
+    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+    if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  render(0);
+})();
+</script>
+</div>
+<!-- STITCH_SHADER_END:ANIMATION_15 -->
+</div>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface-container/80 backdrop-blur-xl border-b border-outline-variant/30 flex justify-between items-center px-lg py-sm max-w-container-max mx-auto">
+<div class="flex items-center gap-lg">
+<span class="text-headline-md font-headline-md font-bold text-primary dark:text-on-primary-fixed">WorkNest</span>
+<div class="hidden md:flex gap-md">
+<a class="text-secondary font-bold border-b-2 border-secondary pb-1 text-label-md font-label-md cursor-pointer hover:opacity-80 transition-all duration-200" href="#">Product</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 text-label-md font-label-md cursor-pointer hover:opacity-80 active:scale-95" href="#">Solutions</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 text-label-md font-label-md cursor-pointer hover:opacity-80 active:scale-95" href="#">Features</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 text-label-md font-label-md cursor-pointer hover:opacity-80 active:scale-95" href="#">Security</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 text-label-md font-label-md cursor-pointer hover:opacity-80 active:scale-95" href="#">Resources</a>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<button class="hidden md:block px-4 py-2 text-on-surface-variant hover:text-secondary transition-colors duration-200 text-label-md font-label-md">Sign In</button>
+<button class="px-4 py-2 bg-secondary text-on-secondary rounded-lg hover:bg-secondary/90 transition-colors duration-200 text-label-md font-label-md active:scale-95">Get Started</button>
+</div>
+</nav>
+<main class="pt-24 pb-xl">
+<!-- Hero Section -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-gutter pt-xl md:pt-[80px] pb-xl flex flex-col items-center text-center reveal">
+<h1 class="font-display-lg text-[40px] leading-[48px] md:text-display-lg text-primary max-w-4xl mb-lg">HR operations, connected intelligently.</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-xl">WorkNest connects attendance, leave, compliance, overtime and payroll into one intelligent workforce platform.</p>
+<div class="flex flex-col sm:flex-row gap-md mb-[80px]">
+<button class="px-6 py-3 bg-secondary text-on-secondary rounded-lg hover:bg-secondary/90 transition-colors duration-200 text-label-md font-label-md shadow-sm">Get Started</button>
+<button class="px-6 py-3 bg-transparent border border-outline text-primary rounded-lg hover:bg-surface-container-low transition-colors duration-200 text-label-md font-label-md">Explore WorkNest</button>
+</div>
+<!-- Hero Visual: Abstract Dashboard Representation -->
+<div class="relative w-full max-w-5xl h-[400px] md:h-[600px] mt-lg flex items-center justify-center">
+<!-- Central Hub -->
+<div class="absolute z-10 glass-panel p-lg rounded-xl shadow-lg w-[80%] max-w-3xl border border-outline-variant/30 bg-surface-container-lowest/90">
+<div class="flex justify-between items-center mb-md border-b border-outline-variant/20 pb-sm">
+<h3 class="font-headline-md text-headline-md text-primary">Workforce Overview</h3>
+<span class="material-symbols-outlined text-on-surface-variant" style="font-variation-settings: 'FILL' 0;">more_horiz</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-md">
+<div class="p-md bg-surface-container-low rounded-lg">
+<p class="font-label-md text-label-md text-on-surface-variant mb-xs">Total Employees</p>
+<p class="font-numeric-kpi text-numeric-kpi text-primary">1,248</p>
+</div>
+<div class="p-md bg-surface-container-low rounded-lg">
+<p class="font-label-md text-label-md text-on-surface-variant mb-xs">Active Today</p>
+<p class="font-numeric-kpi text-numeric-kpi text-secondary">1,192</p>
+</div>
+<div class="p-md bg-surface-container-low rounded-lg">
+<p class="font-label-md text-label-md text-on-surface-variant mb-xs">Pending Approvals</p>
+<p class="font-numeric-kpi text-numeric-kpi text-error">14</p>
+</div>
+</div>
+</div>
+<!-- Floating Nodes -->
+<div class="absolute top-[10%] left-[5%] glass-panel p-md rounded-lg shadow-md border border-outline-variant/30 flex items-center gap-sm animate-[float_6s_ease-in-out_infinite]">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">event_available</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-primary">Attendance</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Syncing...</p>
+</div>
+</div>
+<div class="absolute bottom-[15%] right-[5%] glass-panel p-md rounded-lg shadow-md border border-outline-variant/30 flex items-center gap-sm animate-[float_7s_ease-in-out_infinite_reverse]">
+<div class="w-10 h-10 rounded-full bg-tertiary-container flex items-center justify-center text-on-tertiary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">payments</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-primary">Payroll</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Processed</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Product Showcase -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-xl reveal">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-xl items-center">
+<div class="order-2 lg:order-1 relative h-[500px] w-full rounded-xl overflow-hidden bg-surface-container-lowest border border-outline-variant/30 shadow-sm flex items-center justify-center">
+<img class="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-multiply" data-alt="A detailed, high-resolution UI mockup showing an HR dashboard with charts, graphs, and employee avatars in a bright, modern light-mode setting. The interface features a pristine white background with electric indigo accents and subtle gray borders. The layout is clean and professional, emphasizing data clarity and structural intelligence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCx_-iz_v1I0roJGJ_NhIPp8WQP00AI_742SOJSah6nPm4xiOx7ukhcQhEBmXdOkV--uAVpSmEgFKa0FCo_FVuvSTmAFDmgAh4QKQmU7rOWu56VWxtChd19fCJvSMEijyl_0L2dvQjodxq9FK9Eqk9hhfJgWss4mGXwzFry80DmPJOtba0Mo3dtwFi0yePs8NZDK2RDG8xEMkeWpyRqfg-z24Lz0dUGyo4dxGtLtIAAleFWIxRB4fRyQg"/>
+<div class="relative z-10 glass-panel p-lg rounded-xl shadow-lg w-[80%]">
+<h4 class="font-headline-md text-headline-md text-primary mb-md">Smart Leave Analysis</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-lg">Don't just approve leave. Understand its impact.</p>
+<div class="mb-sm flex justify-between items-end">
+<span class="font-label-md text-label-md text-on-surface-variant">Project Coverage</span>
+<span class="font-label-md text-label-md text-error font-bold">Dropping to 68%</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-2 mb-md">
+<div class="bg-error h-2 rounded-full" style="width: 68%"></div>
+</div>
+<div class="flex justify-between items-center pt-sm border-t border-outline-variant/20">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-surface-tint border-2 border-surface-container-lowest"></div>
+<div class="w-8 h-8 rounded-full bg-secondary-container border-2 border-surface-container-lowest"></div>
+<div class="w-8 h-8 rounded-full bg-tertiary-container border-2 border-surface-container-lowest"></div>
+</div>
+<button class="px-4 py-2 bg-surface-container-high text-primary rounded text-label-md font-label-md hover:bg-surface-variant transition-colors">Review Impact</button>
+</div>
+</div>
+</div>
+<div class="order-1 lg:order-2 space-y-md">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">Context-aware decision making.</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">WorkNest analyzes historical data, current project loads, and team availability to provide actionable insights right when you need them.</p>
+<ul class="space-y-sm mt-lg">
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-secondary mt-1" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div>
+<h5 class="font-label-md text-label-md text-primary">Automated Conflict Detection</h5>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Instantly spot overlap in essential roles.</p>
+</div>
+</li>
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-secondary mt-1" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div>
+<h5 class="font-label-md text-label-md text-primary">Predictive Coverage</h5>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Forecast staffing shortages before they happen.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Trust Section -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-xl text-center reveal">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-sm">Built for sensitive workforce data</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto mb-xl">Enterprise-grade security and compliance baked into every layer.</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<div class="p-lg bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm flex flex-col items-center hover:shadow-md transition-shadow duration-200">
+<div class="w-12 h-12 rounded-full bg-secondary-container/10 flex items-center justify-center text-secondary mb-md">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 0;">shield</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-xs text-center">Security</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-center">End-to-end encryption for all employee data at rest and in transit.</p>
+</div>
+<div class="p-lg bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm flex flex-col items-center hover:shadow-md transition-shadow duration-200">
+<div class="w-12 h-12 rounded-full bg-secondary-container/10 flex items-center justify-center text-secondary mb-md">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 0;">gavel</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-xs text-center">Compliance</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-center">Automated adherence to local labor laws and reporting requirements.</p>
+</div>
+<div class="p-lg bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm flex flex-col items-center hover:shadow-md transition-shadow duration-200">
+<div class="w-12 h-12 rounded-full bg-secondary-container/10 flex items-center justify-center text-secondary mb-md">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 0;">admin_panel_settings</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-xs text-center">Role-Based Access</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-center">Granular permissions ensuring employees only see what they need to.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-auto bg-surface-container-lowest dark:bg-surface-container-highest border-t border-outline-variant/30 flat no shadows grid grid-cols-1 md:grid-cols-4 gap-lg px-xl py-xl max-w-container-max mx-auto relative z-10">
+<div>
+<span class="font-headline-md text-headline-md text-primary">WorkNest</span>
+<p class="font-body-sm text-body-sm text-on-surface mt-sm">© 2024 WorkNest Enterprise. All rights reserved.</p>
+</div>
+<div class="flex flex-col gap-sm">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors hover:underline transition-all duration-200" href="#">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors hover:underline transition-all duration-200" href="#">Terms of Service</a>
+</div>
+<div class="flex flex-col gap-sm">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors hover:underline transition-all duration-200" href="#">Security Architecture</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors hover:underline transition-all duration-200" href="#">Contact Support</a>
+</div>
+<div>
+<!-- Empty column for layout balance -->
+</div>
+</footer>
+<script>
+        // Simple scroll reveal
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            const revealOnScroll = () => {
+                const windowHeight = window.innerHeight;
+                const elementVisible = 100;
+                
+                reveals.forEach((reveal) => {
+                    const elementTop = reveal.getBoundingClientRect().top;
+                    if (elementTop < windowHeight - elementVisible) {
+                        reveal.classList.add('active');
+                    }
+                });
+            };
+            
+            window.addEventListener('scroll', revealOnScroll);
+            revealOnScroll(); // Trigger on load
+        });
+    </script>
+</body></html>
