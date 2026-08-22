@@ -49,6 +49,9 @@ function formatLoginError(message: string): string {
   if (/inactive/i.test(message)) {
     return 'This account is inactive. Contact your HR administrator.';
   }
+  if (/could not reach the backend api|vite_api_base_url|frontend_url on render/i.test(message)) {
+    return message;
+  }
   return message;
 }
 

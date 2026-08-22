@@ -44,6 +44,14 @@ interface BootstrapResult {
 }
 
 async function parseError(res: Response): Promise<string> {
+  const contentType = res.headers.get('content-type') ?? '';
+  if (!contentType.includes('application/json')) {
+    if (res.status === 405 || res.status === 404) {
+      return 'Could not reach the backend API. Set VITE_API_BASE_URL to your Render URL on Vercel.';
+    }
+    return 'Request failed';
+  }
+
   try {
     const body = await res.json();
     if (typeof body.detail === 'string') return body.detail;
@@ -55,7 +63,17 @@ async function parseError(res: Response): Promise<string> {
   }
   if (res.status === 401) return 'Invalid Login ID/email or password';
   if (res.status === 403) return 'Access denied';
+  if (res.status === 409) return 'An organization already exists. Please sign in instead.';
   return 'Request failed';
+}
+
+function wrapNetworkError(error: unknown): Error {
+  if (error instanceof TypeError) {
+    return new Error(
+      'Could not reach the backend API. Check VITE_API_BASE_URL on Vercel and FRONTEND_URL on Render.'
+    );
+  }
+  return error instanceof Error ? error : new Error('Request failed');
 }
 
 export function getStoredToken(): string | null {
@@ -105,11 +123,16 @@ export async function login(loginIdOrEmail: string, password: string): Promise<T
     password,
   });
 
-  const res = await fetch(`${API_BASE}/auth/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body,
-  });
+  let res: Response;
+  try {
+    res = await fetch(`${API_BASE}/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body,
+    });
+  } catch (error) {
+    throw wrapNetworkError(error);
+  }
 
   if (!res.ok) {
     throw new Error(await parseError(res));
@@ -178,10 +201,17 @@ export async function changePassword(
 }
 
 export async function loadSession(token: string): Promise<{ user: User; mustChangePassword: boolean }> {
-  const [me, employee] = await Promise.all([
-    fetchMe(token),
-    fetchMyEmployee(token),
-  ]);
+  let me: BackendUser;
+  let employee: BackendEmployee | null;
+
+  try {
+    [me, employee] = await Promise.all([
+      fetchMe(token),
+      fetchMyEmployee(token),
+    ]);
+  } catch (error) {
+    throw wrapNetworkError(error);
+  }
 
   return {
     user: mapToUser(me, employee),

@@ -1,6 +1,6 @@
 from functools import lru_cache
 
-from pydantic import AliasChoices, Field
+from pydantic import AliasChoices, Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -48,6 +48,13 @@ class Settings(BaseSettings):
     )
     brevo_sender_name: str = "WorkNest HRMS"
     standard_work_hours_per_day: float = 8.0
+
+    @field_validator("frontend_url", mode="before")
+    @classmethod
+    def normalize_frontend_url(cls, value: str) -> str:
+        if isinstance(value, str):
+            return value.strip().rstrip("/")
+        return value
 
 
 @lru_cache
