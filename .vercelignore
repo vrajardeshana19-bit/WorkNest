@@ -1,4 +1,5 @@
 backend/
+backend/api/
 api/
 requirements.txt
 .python-version
