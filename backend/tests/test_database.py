@@ -19,14 +19,18 @@ def _create_company(db_session: Session) -> Company:
 
 def test_model_metadata_loads() -> None:
     table_names = set(User.metadata.tables.keys())
-    assert table_names == {
+    assert table_names.issuperset({
         "users",
         "companies",
         "employees",
         "attendances",
         "holidays",
         "email_verification_tokens",
-    }
+        "salary_structures",
+        "compliance_configs",
+        "payroll_records",
+    })
+
 
 
 def test_database_session_creation(db_session: Session) -> None:

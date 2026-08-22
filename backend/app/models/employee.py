@@ -62,3 +62,10 @@ class Employee(Base, UUIDPrimaryKeyMixin, TimestampMixin):
         back_populates="employee",
         cascade="all, delete-orphan",
     )
+    salary_structure: Mapped["SalaryStructure | None"] = relationship(
+        "SalaryStructure", back_populates="employee", uselist=False, cascade="all, delete-orphan"
+    )
+    payroll_records: Mapped[list["PayrollRecord"]] = relationship(
+        "PayrollRecord", back_populates="employee", cascade="all, delete-orphan"
+    )
+
