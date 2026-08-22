@@ -62,3 +62,13 @@ class Employee(Base, UUIDPrimaryKeyMixin, TimestampMixin):
         back_populates="employee",
         cascade="all, delete-orphan",
     )
+    leave_requests: Mapped[list["LeaveRequest"]] = relationship(
+        "LeaveRequest",
+        back_populates="employee",
+        cascade="all, delete-orphan",
+    )
+    time_off_balances: Mapped[list["TimeOffBalance"]] = relationship(
+        "TimeOffBalance",
+        back_populates="employee",
+        cascade="all, delete-orphan",
+    )

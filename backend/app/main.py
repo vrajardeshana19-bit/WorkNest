@@ -5,7 +5,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from app.config import get_settings
 from app.database import check_database_connection
-from app.routers import attendance, auth, employees, holidays, setup
+from app.routers import attendance, auth, employees, holidays, leave, setup, time_off
 from app.schemas.health import DatabaseHealthResponse, HealthResponse
 
 settings = get_settings()
@@ -31,6 +31,8 @@ app.include_router(auth.router, prefix="/api/v1")
 app.include_router(employees.router, prefix="/api/v1")
 app.include_router(attendance.router, prefix="/api/v1")
 app.include_router(holidays.router, prefix="/api/v1")
+app.include_router(leave.router, prefix="/api/v1")
+app.include_router(time_off.router, prefix="/api/v1")
 
 
 @app.get("/api/v1/health", response_model=HealthResponse, tags=["health"])
