@@ -29,11 +29,11 @@ const FLOW_STEPS = ['Employee', 'Attendance', 'Leave', 'Payroll'];
 const ORBIT_RADIUS = 248;
 
 const TIMING = {
-  logo: 900,
-  orbit: 2600,
-  converge: 1500,
-  flow: 1200,
-  exit: 650,
+  logo: 500,
+  orbit: 1400,
+  converge: 900,
+  flow: 700,
+  exit: 350,
 } as const;
 
 export const AuthIntroScene: React.FC<AuthIntroSceneProps> = ({ onComplete }) => {

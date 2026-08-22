@@ -53,6 +53,8 @@ async function parseError(res: Response): Promise<string> {
   } catch {
     // ignore JSON parse errors
   }
+  if (res.status === 401) return 'Invalid Login ID/email or password';
+  if (res.status === 403) return 'Access denied';
   return 'Request failed';
 }
 
@@ -176,8 +178,10 @@ export async function changePassword(
 }
 
 export async function loadSession(token: string): Promise<{ user: User; mustChangePassword: boolean }> {
-  const me = await fetchMe(token);
-  const employee = await fetchMyEmployee(token);
+  const [me, employee] = await Promise.all([
+    fetchMe(token),
+    fetchMyEmployee(token),
+  ]);
 
   return {
     user: mapToUser(me, employee),

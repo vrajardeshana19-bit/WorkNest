@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import { resendVerificationEmail } from '../services/emailApi';
@@ -13,10 +13,44 @@ import {
   EyeOff,
 } from 'lucide-react';
 import { WorkNestLogo } from '../components/common/WorkNestLogo';
-import { LoginHeroVisual } from '../components/auth/LoginHeroVisual';
 import './loginPage.css';
 
+const LoginHeroVisual = lazy(() =>
+  import('../components/auth/LoginHeroVisual').then((m) => ({ default: m.LoginHeroVisual }))
+);
+
 const REMEMBER_KEY = 'worknest_remember_login';
+
+const ROLE_PLACEHOLDERS: Record<'EMPLOYEE' | 'HR' | 'ADMIN', string> = {
+  EMPLOYEE: 'OIEMJO20260001',
+  HR: 'OIHROF20260001',
+  ADMIN: 'OIADMIN20260001',
+};
+
+function formatRoleLabel(role: string): string {
+  if (role === 'EMPLOYEE') return 'Employee';
+  if (role === 'HR') return 'HR';
+  if (role === 'ADMIN') return 'Admin';
+  return role;
+}
+
+function formatLoginError(message: string): string {
+  const roleMismatch = message.match(/registered as (\w+), not (\w+)/i);
+  if (roleMismatch) {
+    const actualRole = formatRoleLabel(roleMismatch[1]);
+    return `These credentials belong to a ${actualRole} account. Switch to the ${actualRole} tab and sign in again.`;
+  }
+  if (/invalid login id|invalid credentials|incorrect password|401/i.test(message)) {
+    return 'Invalid login ID/email or password. Please check your credentials and try again.';
+  }
+  if (/not verified/i.test(message)) {
+    return 'Your email is not verified yet. Check your inbox or resend the verification email below.';
+  }
+  if (/inactive/i.test(message)) {
+    return 'This account is inactive. Contact your HR administrator.';
+  }
+  return message;
+}
 
 interface LoginPageProps {
   onNavigate: (page: string) => void;
@@ -40,6 +74,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onNavigate }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isResending, setIsResending] = useState(false);
   const [showResendVerification, setShowResendVerification] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
   const [errors, setErrors] = useState<{ loginId?: string; password?: string }>({});
 
   const roleTabs = [
@@ -60,6 +95,16 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onNavigate }) => {
     }
   }, []);
 
+  const handleRoleChange = (id: 'EMPLOYEE' | 'HR' | 'ADMIN') => {
+    setActiveRoleTab(id);
+    setLoginId('');
+    setPassword('');
+    setShowPassword(false);
+    setErrors({});
+    setFormError(null);
+    setShowResendVerification(false);
+  };
+
   const validate = () => {
     const errs: { loginId?: string; password?: string } = {};
     if (!loginId) errs.loginId = 'Login ID or email is required';
@@ -74,6 +119,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onNavigate }) => {
     if (!validate()) return;
     setIsLoading(true);
     setShowResendVerification(false);
+    setFormError(null);
     try {
       await login(loginId, password, activeRoleTab);
       try {
@@ -85,8 +131,10 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onNavigate }) => {
       showToast('Signed in', 'success');
       onNavigate('dashboard');
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Invalid credentials.';
-      setShowResendVerification(/not verified/i.test(message) && loginId.includes('@'));
+      const rawMessage = error instanceof Error ? error.message : 'Invalid credentials.';
+      const message = formatLoginError(rawMessage);
+      setFormError(message);
+      setShowResendVerification(/not verified/i.test(rawMessage) && loginId.includes('@'));
       showToast('Sign in failed', 'error', message);
     } finally {
       setIsLoading(false);
@@ -159,7 +207,9 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onNavigate }) => {
             </div>
 
             <div className="login-page__visual-wrap">
-              <LoginHeroVisual />
+              <Suspense fallback={null}>
+                <LoginHeroVisual />
+              </Suspense>
             </div>
           </section>
 
@@ -176,10 +226,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onNavigate }) => {
                 <button
                   key={id}
                   type="button"
-                  onClick={() => {
-                    setActiveRoleTab(id);
-                    setErrors({});
-                  }}
+                  onClick={() => handleRoleChange(id)}
                   className={`login-page__role-tab ${
                     activeRoleTab === id ? 'login-page__role-tab--active' : ''
                   }`}
@@ -191,6 +238,12 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onNavigate }) => {
             </div>
 
             <form className="space-y-4" onSubmit={handleSubmit}>
+              {formError && (
+                <div className="login-page__form-error" role="alert">
+                  {formError}
+                </div>
+              )}
+
               <div>
                 <label className="wn-label block mb-1.5">Login ID or email</label>
                 <div className="relative">
@@ -198,8 +251,11 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onNavigate }) => {
                   <input
                     type="text"
                     value={loginId}
-                    onChange={(e) => setLoginId(e.target.value)}
-                    placeholder="OIEMP20260001"
+                    onChange={(e) => {
+                      setLoginId(e.target.value);
+                      if (formError) setFormError(null);
+                    }}
+                    placeholder={ROLE_PLACEHOLDERS[activeRoleTab]}
                     className={`wn-input pl-10 pr-3 py-2.5 ${errors.loginId ? 'border-wn-error' : ''}`}
                   />
                 </div>
@@ -213,7 +269,10 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onNavigate }) => {
                   <input
                     type={showPassword ? 'text' : 'password'}
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                      if (formError) setFormError(null);
+                    }}
                     className={`wn-input pl-10 pr-10 py-2.5 ${errors.password ? 'border-wn-error' : ''}`}
                   />
                   <button

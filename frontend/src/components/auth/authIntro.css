@@ -7,7 +7,7 @@
   justify-content: center;
   background: #f7f9fb;
   overflow: hidden;
-  transition: opacity 0.7s ease, visibility 0.7s ease;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
 }
 
 .auth-intro-root--exit {
