@@ -12,3 +12,7 @@ class Company(Base, UUIDPrimaryKeyMixin, TimestampMixin):
     logo_url: Mapped[str | None] = mapped_column(String(500), nullable=True)
 
     employees: Mapped[list["Employee"]] = relationship("Employee", back_populates="company")
+    compliance_config: Mapped["ComplianceConfig | None"] = relationship(
+        "ComplianceConfig", back_populates="company", uselist=False, cascade="all, delete-orphan"
+    )
+

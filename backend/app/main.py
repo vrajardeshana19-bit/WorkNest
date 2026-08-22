@@ -5,15 +5,25 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from app.config import get_settings
 from app.database import check_database_connection
-from app.routers import attendance, auth, employees, holidays, leave, setup, time_off
+from app.routers import (
+    attendance,
+    auth,
+    compliance,
+    employees,
+    holidays,
+    overtime,
+    payroll,
+    salary,
+    setup,
+)
 from app.schemas.health import DatabaseHealthResponse, HealthResponse
 
 settings = get_settings()
 
 app = FastAPI(
     title="Dayflow API",
-    description="HRMS backend — authentication, employees, attendance, holidays",
-    version="0.5.0",
+    description="HRMS backend — authentication, employees, attendance, holidays, overtime, compliance, salary, payroll",
+    version="0.6.0",
     docs_url="/docs",
     redoc_url="/redoc",
 )
@@ -31,8 +41,11 @@ app.include_router(auth.router, prefix="/api/v1")
 app.include_router(employees.router, prefix="/api/v1")
 app.include_router(attendance.router, prefix="/api/v1")
 app.include_router(holidays.router, prefix="/api/v1")
-app.include_router(leave.router, prefix="/api/v1")
-app.include_router(time_off.router, prefix="/api/v1")
+app.include_router(overtime.router, prefix="/api/v1")
+app.include_router(compliance.router, prefix="/api/v1")
+app.include_router(salary.router, prefix="/api/v1")
+app.include_router(payroll.router, prefix="/api/v1")
+
 
 
 @app.get("/api/v1/health", response_model=HealthResponse, tags=["health"])

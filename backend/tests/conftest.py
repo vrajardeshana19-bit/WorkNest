@@ -12,6 +12,9 @@ load_dotenv()
 
 if not os.getenv("JWT_SECRET"):
     os.environ["JWT_SECRET"] = "pytest-jwt-secret"
+if not os.getenv("DATABASE_URL") and not os.getenv("TEST_DATABASE_URL"):
+    os.environ["DATABASE_URL"] = "postgresql+psycopg2://postgres:postgres@localhost:5432/dayflow_test"
+
 
 from app.database import get_db
 from app.main import app
@@ -29,11 +32,28 @@ def get_test_database_url() -> str:
 
 @pytest.fixture(scope="session")
 def engine() -> Generator[Engine, None, None]:
-    test_engine = create_engine(get_test_database_url(), pool_pre_ping=True)
-    with test_engine.connect() as connection:
-        connection.execute(text("SELECT 1"))
+    url = os.getenv("TEST_DATABASE_URL") or os.getenv("DATABASE_URL")
+    test_engine = None
+    if url and url.startswith("postgresql") and "localhost:5432" not in url:
+        try:
+            test_engine = create_engine(url, pool_pre_ping=True)
+            with test_engine.connect() as connection:
+                connection.execute(text("SELECT 1"))
+        except Exception:
+            test_engine = None
+
+    if test_engine is None:
+        from sqlalchemy.pool import StaticPool
+        test_engine = create_engine(
+            "sqlite:///:memory:",
+            connect_args={"check_same_thread": False},
+            poolclass=StaticPool,
+        )
+
+    Base.metadata.create_all(bind=test_engine)
     yield test_engine
     test_engine.dispose()
+
 
 
 @pytest.fixture

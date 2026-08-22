@@ -22,3 +22,22 @@ class EmployeeDisplayStatus(str, Enum):
     PRESENT = "PRESENT"
     ON_LEAVE = "ON_LEAVE"
     ABSENT = "ABSENT"
+
+
+class WageType(str, Enum):
+    MONTHLY = "MONTHLY"
+    YEARLY = "YEARLY"
+    HOURLY = "HOURLY"
+
+
+class ComplianceStatus(str, Enum):
+    NORMAL = "NORMAL"
+    APPROACHING_LIMIT = "APPROACHING_LIMIT"
+    EXCEEDED_LIMIT = "EXCEEDED_LIMIT"
+
+
+class PayrollStatus(str, Enum):
+    DRAFT = "DRAFT"
+    PROCESSED = "PROCESSED"
+    PAID = "PAID"
+

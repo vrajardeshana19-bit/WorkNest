@@ -21,11 +21,16 @@ def _quantize_hours(value: Decimal) -> Decimal:
 
 def _calculate_hours(check_in: datetime, check_out: datetime) -> tuple[Decimal, Decimal]:
     settings = get_settings()
+    if check_in.tzinfo is None and check_out.tzinfo is not None:
+        check_in = check_in.replace(tzinfo=timezone.utc)
+    elif check_out.tzinfo is None and check_in.tzinfo is not None:
+        check_out = check_out.replace(tzinfo=timezone.utc)
     duration = check_out - check_in
     total_hours = _quantize_hours(Decimal(duration.total_seconds()) / Decimal(3600))
     standard = Decimal(str(settings.standard_work_hours_per_day))
     extra_hours = _quantize_hours(max(Decimal("0"), total_hours - standard))
     return total_hours, extra_hours
+
 
 
 def _format_time(value: datetime | None) -> str | None:

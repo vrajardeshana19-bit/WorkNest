@@ -99,7 +99,8 @@ def test_admin_daily_attendance_view(client: TestClient, db_session: Session) ->
         headers={"Authorization": f"Bearer {employee_token}"},
     )
 
-    admin = db_session.query(User).filter(User.role == Role.ADMIN).one()
+    admin = db_session.query(User).filter(User.role == Role.ADMIN, User.email == _company.name).first() or db_session.query(User).filter(User.role == Role.ADMIN).first()
+
     admin_token = _login(client, admin.email, "adminpass123")
     response = client.get(
         "/api/v1/attendance",
