@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+@theme {
+  --font-geist: 'Geist', system-ui, sans-serif;
+  --font-inter: 'Inter', system-ui, sans-serif;
+
+  --color-wn-surface: #f7f9fb;
+  --color-wn-surface-dim: #d8dadc;
+  --color-wn-surface-container-low: #f2f4f6;
+  --color-wn-surface-container: #eceef0;
+  --color-wn-surface-container-lowest: #ffffff;
+  --color-wn-on-surface: #191c1e;
+  --color-wn-on-surface-variant: #45464d;
+  --color-wn-outline-variant: #c6c6cd;
+  --color-wn-primary: #191c1e;
+  --color-wn-secondary: #4648d4;
+  --color-wn-secondary-container: #6063ee;
+  --color-wn-error: #ba1a1a;
+  --color-wn-inverse-surface: #2d3133;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-wn-surface);
+    color: var(--color-wn-on-surface);
+    font-family: var(--font-inter);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-geist);
+  }
+
+  input, select, textarea {
+    color: var(--color-wn-on-surface);
+  }
+}
+
+@layer components {
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(198, 198, 205, 0.45);
+  }
+
+  .wn-app-bg {
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 0%, rgba(70, 72, 212, 0.08), transparent 50%),
+      radial-gradient(ellipse 60% 40% at 90% 10%, rgba(96, 99, 238, 0.06), transparent 45%),
+      #f7f9fb;
+  }
+
+  .wn-card {
+    @apply bg-wn-surface-container-lowest border border-wn-outline-variant/40 rounded-xl shadow-sm;
+    box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.05);
+  }
+
+  .wn-kpi-label {
+    @apply text-sm font-medium text-wn-on-surface-variant tracking-wide;
+    font-family: var(--font-geist);
+  }
+
+  .wn-kpi-value {
+    @apply text-[2rem] font-bold text-wn-primary leading-tight tracking-tight;
+    font-family: var(--font-geist);
+  }
+
+  .wn-label {
+    @apply text-sm font-medium text-wn-on-surface-variant;
+    font-family: var(--font-geist);
+  }
+
+  .wn-muted {
+    @apply text-sm text-wn-on-surface-variant;
+  }
+
+  .wn-input {
+    @apply w-full bg-wn-surface-container-low border border-wn-outline-variant/50 rounded-lg text-sm text-wn-on-surface placeholder:text-wn-on-surface-variant/60 focus:outline-none focus:bg-white focus:border-wn-secondary focus:ring-2 focus:ring-wn-secondary/15 transition-colors duration-200;
+  }
+
+  .wn-btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium text-white bg-wn-secondary hover:bg-wn-secondary/90 disabled:opacity-50 transition-all duration-200 active:scale-[0.98];
+    font-family: var(--font-geist);
+  }
+
+  .wn-btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium text-wn-primary bg-transparent border border-wn-outline-variant hover:bg-wn-surface-container-low disabled:opacity-50 transition-all duration-200;
+    font-family: var(--font-geist);
+  }
+
+  .wn-btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-wn-on-surface-variant hover:text-wn-secondary hover:bg-wn-surface-container-low transition-colors duration-200;
+    font-family: var(--font-geist);
+  }
+
+  .wn-page-header {
+    @apply mb-6;
+  }
+
+  .wn-page-title {
+    @apply text-2xl font-semibold text-wn-primary tracking-tight;
+    font-family: var(--font-geist);
+  }
+
+  .wn-page-subtitle {
+    @apply text-base text-wn-on-surface-variant mt-1;
+  }
+
+  .wn-stat-tile {
+    @apply p-4 bg-wn-surface-container-low rounded-lg;
+  }
+
+  .wn-table-head {
+    @apply bg-wn-surface-container-low border-b border-wn-outline-variant/40 text-wn-on-surface-variant text-xs font-medium;
+    font-family: var(--font-geist);
+  }
+
+  .wn-table-row {
+    @apply border-b border-wn-outline-variant/20 text-wn-on-surface hover:bg-wn-surface-container-low/60 transition-colors duration-200;
+  }
+
+  .wn-nav-active {
+    @apply text-wn-secondary font-medium border-b-2 border-wn-secondary pb-0.5;
+  }
+
+  .wn-nav-item {
+    @apply text-wn-on-surface-variant hover:text-wn-secondary transition-colors duration-200;
+    font-family: var(--font-geist);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f2f4f6;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c6c6cd;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #76777d;
+}
